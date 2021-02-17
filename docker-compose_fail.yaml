@@ -1,0 +1,47 @@
+version: "3.3"
+
+ services:
+   
+front:
+  image: node:12-alpine
+  container_name: frontend
+  ports: 
+    - "3000:3000"
+  depends_on:
+    - back
+  volumes: 
+    - front_data:/frontend
+  healthcheck:
+    test: ["CMD", "wget", "http://localhost:3000"]
+    interval: 3s
+    timeout: 3s
+    retries: 10
+    start_period: 5s
+    restart: always
+    
+back:
+  image: python:3.7-slim-buster
+  container_name: backend
+  ports: 
+    - "4000:4000"
+  volumes: 
+    - back_data:/backend
+  entrypoint: 
+    - /bin/sh
+    - -c
+    - |
+     cp /backend/app /backend/app
+     cd /app/src
+     python server.py
+  healthcheck:
+    test: ["CMD", "wget", "http://0.0.0.0"]
+    interval: 3s
+    timeout: 3s
+    retries: 10
+    start_period: 5s
+  restart: always
+
+Volumes:
+  front_data:
+  back_data:
+  

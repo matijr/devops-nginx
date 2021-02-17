@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  front:
+    build: 
+      dockerfile: Dockerfile
+      context: ./frontend
+    container_name: frontend
+    environment:
+       NODE_ENV: process.env.NODE_ENV
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back
+    links:
+      - back
+    volumes:
+      - front_data:/frontend
+    
+  back:
+    build: 
+      dockerfile: Dockerfile
+      context: ./backend
+    container_name: backend
+#    environment:
+#      - APP_BACK_PORT= 4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - back_data:/backend
+
+volumes:
+  front_data:
+  back_data:
+
+  

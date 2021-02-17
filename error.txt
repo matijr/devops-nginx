@@ -1,0 +1,22 @@
+rontend | 
+frontend | ./src/views/RequestsLoan/TablePage.jsx
+frontend |   Line 23:  Useless constructor                        no-useless-constructor
+frontend |   Line 59:  'page' is assigned a value but never used  no-unused-vars
+frontend | 
+frontend | ./src/index.js
+frontend |   Line 35:  'unregister' is assigned a value but never used  no-unused-vars
+frontend | 
+frontend | ./src/views/RequestsLoan/components/Form.jsx
+frontend |   Line 35:  Expected to return a value in arrow function  array-callback-return
+frontend | 
+frontend | ./src/layouts/Dashboard.jsx
+frontend |   Line 5:   'Link' is defined but never used              no-unused-vars
+frontend |   Line 42:  Do not mutate state directly. Use setState()  react/no-direct-mutation-state
+frontend | 
+frontend | ./src/views/RequestsLoan/components/Table.jsx
+frontend |   Line 62:  Script URL is a form of eval  no-script-url
+frontend |   Line 64:  Script URL is a form of eval  no-script-url
+frontend | 
+frontend | Search for the keywords to learn more about each warning.
+frontend | To ignore, add // eslint-disable-next-line to the line before.
+
