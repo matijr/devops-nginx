@@ -5,14 +5,14 @@ services:
       dockerfile: Dockerfile
       context: ./frontend
     container_name: frontend
+    env_file: 
+       - .env
     environment:
-       NODE_ENV: process.env.NODE_ENV
+       - DJANGO_SETTINGS_MODULE=backend.settings
+       - APP_FRONT_PORT= 3000
+       - APP_FRONT_HOST= http://localhost:3000/
     ports:
       - "3000:3000"
-    depends_on:
-      - back
-    links:
-      - back
     volumes:
       - front_data:/frontend
     
@@ -21,13 +21,31 @@ services:
       dockerfile: Dockerfile
       context: ./backend
     container_name: backend
-#    environment:
-#      - APP_BACK_PORT= 4000
+    env_file: 
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings
+      - APP_BACK_PORT= 8000
+      - ALLOWED_HOST= 0.0.0.0:8000
     ports:
-      - "4000:4000"
+      - "8000:8000"
+    depends_on:
+      - front
+      - db
     volumes:
       - back_data:/backend
-
+    command: python3 manage.py runserver 0.0.0.0:8000
+  
+  db:
+    image: postgres
+    container_name: db
+    ports: 
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+       
 volumes:
   front_data:
   back_data:

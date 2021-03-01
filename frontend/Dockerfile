@@ -1,13 +1,18 @@
-FROM node:12-alpine
+FROM node:14-alpine
 WORKDIR /frontend
 ENV PATH /node_modules/.bin:$PATH
-ENV NODE_ENV=process.env.NODE_ENV
+ENV BABEL_ENV=development
+ENV NODE_ENV=development
+ENV require=./config/env
+ENV process.on=unhandledRejection
 COPY package*.json ./
-RUN npm install
-RUN npm install promise
-RUN npm install react-scripts@3.4.1
-#RUN npm install eslint babel-eslint
+#Dependencias necesarias
+#RUN npm install react-scripts@3.4.1
+#RUN npm install promise -g
+#RUN npm install babel -g
+#RUN npm install webpack webpack-dev-server -g
+RUN npm install --production
 EXPOSE 3000
 COPY . .
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "start" ]
 

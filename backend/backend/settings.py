@@ -116,12 +116,12 @@ ROOT_URLCONF = 'backend.urls'
 #############################################
 DATABASES = {
     'default': {
-        'ENGINE': env('DB_ENGINE'),
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASS'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'ENGINE': env('django.db.backends.postgresql'),
+        'NAME': env('postgres'),
+        'USER': env('postgres'),
+        'PASSWORD': env('postgres'),
+        'HOST': env('db'),
+        'PORT': env('5432'),
     }
 }
 

@@ -10,6 +10,6 @@ RUN pip3 install psycopg2-binary
 COPY requirements.txt requirements.txt
 #Instalacion de requisitos
 RUN pip3 install -r requirements.txt
-EXPOSE 4000
+EXPOSE 8000
 COPY . .
-CMD [ "python3", "manage.py", "runserver", "0.0.0.0:4000" ]
+CMD [ "python3", "manage.py", "collectstatic" ]
